@@ -1,7 +1,7 @@
 export default function Home() {
   return (
     <div
-      className="text-center w-full py-16 px-4 font-serif min-h-screen bg-cover bg-center bg-no-repeat"
+      className="text-center w-full py-32 px-4 font-serif min-h-screen bg-cover bg-center bg-no-repeat"
       style={{
         backgroundImage: "url('/images/bg-pizza.jpg')",
         backgroundColor: "rgba(255,255,255,0.85)",
