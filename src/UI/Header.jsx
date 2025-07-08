@@ -1,13 +1,16 @@
+import { useSelector } from 'react-redux';
+
 export default function Header() {
+  const username = useSelector((state) => state.user.userName);
+  console.log('🧪 username', username);
   return (
-    <header className="bg-orange-400 flex items-center justify-between px-4 py-3">
-      <p className="uppercase ">fast react pizza co. </p>
+    <header className="flex items-center justify-between bg-orange-400 px-4 py-3">
+      <p className="uppercase">fast react pizza co. </p>
       <input
-        className="bg-white rounded-full text-stone-100 text-center"
+        className="rounded-full bg-white text-center text-stone-100"
         placeholder="Search order # "
       />
-      <p>userName</p>
-      {/* replace with userName from redux store */}
+      {username ? <div className="text-black">{username}</div> : null}
     </header>
   );
 }

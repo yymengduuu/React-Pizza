@@ -1,4 +1,4 @@
-import { useSelector } from "react-redux";
+import { useSelector } from 'react-redux';
 
 export default function Cart() {
   const userName = useSelector((state) => state.user.userName);
