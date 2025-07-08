@@ -1,16 +1,22 @@
+import { useState } from "react";
+
 export default function MenuItem({ pizza }) {
   const { imageUrl, name, ingredients, unitPrice, soldOut } = pizza;
+  const [addedToCart, setAddedToCart] = useState(false);
 
   const handleAdd = (e) => {
     e.preventDefault();
-    console.log("Add to cart clicked for:", name);
     // Here you would typically dispatch an action to add the item to the cart
   };
 
   return (
     <div>
       <li className="grid grid-cols-[auto_1fr_auto] gap-10 py-4 items-center border-b border-gray-300">
-        <img src={imageUrl} alt={name} />
+        <img
+          className={`h-36 ${soldOut ? "opacity-70 grayscale" : ""}`}
+          src={imageUrl}
+          alt={name}
+        />
         <div className="font-serif">
           <p className="font-bold text-2xl text-stone-900">{name}</p>
           <p className="py-4 text-lg text-stone-600">
@@ -22,13 +28,15 @@ export default function MenuItem({ pizza }) {
             <p className="py-5 text-stone-700">$ {unitPrice}.00</p>
           )}
         </div>
-        <button
-          className="uppercase bg-stone-700 text-white rounded-full px-4 py-3 text-sm "
-          onClick={handleAdd}
-          disabled={soldOut}
-        >
-          {soldOut ? "sold out" : "add to cart"}
-        </button>
+
+        {!soldOut && (
+          <button
+            className="uppercase rounded-full px-4 py-3 text-sm min-w-[120px] text-center bg-stone-700 text-white"
+            onClick={handleAdd}
+          >
+            {addedToCart ? "delete" : "add to cart"}
+          </button>
+        )}
       </li>
     </div>
   );

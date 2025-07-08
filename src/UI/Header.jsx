@@ -6,6 +6,8 @@ export default function Header() {
         className="bg-white rounded-full text-stone-100 text-center"
         placeholder="Search order # "
       />
+      <p>userName</p>
+      {/* replace with userName from redux store */}
     </header>
   );
 }
