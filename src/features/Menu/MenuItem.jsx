@@ -1,8 +1,5 @@
-import { useState } from "react";
-
 export default function MenuItem({ pizza }) {
   const { imageUrl, name, ingredients, unitPrice, soldOut } = pizza;
-  const [addedToCart, setAddedToCart] = useState(false);
 
   const handleAdd = (e) => {
     e.preventDefault();
@@ -34,7 +31,7 @@ export default function MenuItem({ pizza }) {
             className="uppercase rounded-full px-4 py-3 text-sm min-w-[120px] text-center bg-stone-700 text-white"
             onClick={handleAdd}
           >
-            {addedToCart ? "delete" : "add to cart"}
+            add to cart
           </button>
         )}
       </li>
