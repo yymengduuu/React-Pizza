@@ -16,14 +16,18 @@ export default function MenuItem({ pizza }) {
           <p className="py-4 text-lg text-stone-600">
             {ingredients.join(", ")}
           </p>
-
-          <p className="py-5 text-stone-700">$ {unitPrice}.00</p>
+          {soldOut ? (
+            <p>Sold Out</p>
+          ) : (
+            <p className="py-5 text-stone-700">$ {unitPrice}.00</p>
+          )}
         </div>
         <button
           className="uppercase bg-stone-700 text-white rounded-full px-4 py-3 text-sm "
           onClick={handleAdd}
+          disabled={soldOut}
         >
-          add to cart
+          {soldOut ? "sold out" : "add to cart"}
         </button>
       </li>
     </div>
