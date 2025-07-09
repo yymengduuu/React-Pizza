@@ -1,11 +1,17 @@
 import currentCartQuantity from '../../features/Cart/cartSlice.js';
-import updateCartQuantity from '../Cart/updateCartQuantity';
+import { useSelector, useDispatch } from 'react-redux';
+import { addItem } from '../../features/Cart/cartSlice.js';
+import UpdateCartQuantity from '../Cart/UpdateCartQuantity.jsx';
 
 export default function MenuItem({ pizza }) {
-  const { imageUrl, name, ingredients, unitPrice, soldOut } = pizza;
+  const { id, imageUrl, name, ingredients, unitPrice, soldOut } = pizza;
+
+  const quantity = useSelector(currentCartQuantity(id));
+  const dispatch = useDispatch();
 
   const handleAdd = (e) => {
     e.preventDefault();
+    dispatch(addItem({ ...pizza, quantity: 1 }));
     // Here you would typically dispatch an action to add the item to the cart
   };
 
@@ -28,14 +34,18 @@ export default function MenuItem({ pizza }) {
             <p className="py-5 text-stone-700">$ {unitPrice}.00</p>
           )}
         </div>
-        <updateCartQuantity />
-        {!soldOut && (
-          <button
-            className="min-w-[120px] rounded-full bg-stone-700 px-4 py-3 text-center text-sm uppercase text-white"
-            onClick={handleAdd}
-          >
-            add to cart
-          </button>
+
+        {quantity > 0 ? (
+          <UpdateCartQuantity id={id} quantity={quantity} />
+        ) : (
+          !soldOut && (
+            <button
+              className="min-w-[120px] rounded-full bg-stone-700 px-4 py-3 text-center text-sm uppercase text-white"
+              onClick={handleAdd}
+            >
+              add to cart
+            </button>
+          )
         )}
       </li>
     </div>

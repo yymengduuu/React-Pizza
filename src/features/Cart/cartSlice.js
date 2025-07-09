@@ -46,6 +46,6 @@ export const {
 export const selectCartItems = (state) => state.cart.items;
 export default cartSlice.reducer;
 
-const currentCartQuantity = (state, action) => {
-  return state.cart.items.find((item) => item.id === action.payload.id);
+export const currentCartQuantity = (pizzaId) => (state) => {
+  return state.cart.items.find((item) => item.id === pizzaId)?.quantity || 0;
 };

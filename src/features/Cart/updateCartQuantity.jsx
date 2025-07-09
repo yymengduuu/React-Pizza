@@ -1,20 +1,24 @@
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { increaseItemQuantity, decreaseItemQuantity } from './cartSlice';
 
-export default function updateCartQuantity() {
+export default function UpdateCartQuantity({ id, quantity }) {
   const dispatch = useDispatch();
-  const handleIncrease = (itemId) => {
-    dispatch(increaseItemQuantity(itemId));
-  };
-  const handleDecrease = (itemId) => {
-    dispatch(decreaseItemQuantity(itemId));
-  };
 
   return (
     <div>
-      <button type="round" onClick={handleDecrease}></button>
-      <span>0</span>
-      <button type="round" onClick={handleIncrease}></button>
+      <button
+        className="rounded-full"
+        onClick={() => dispatch(increaseItemQuantity(id))}
+      >
+        -
+      </button>
+      <span>{quantity}</span>
+      <button
+        className="rounded-full"
+        onClick={() => dispatch(decreaseItemQuantity(id))}
+      >
+        +
+      </button>
     </div>
   );
 }
