@@ -24,11 +24,16 @@ export default function CreateUser() {
         placeholder="Your full name"
         value={userName}
         onChange={(e) => setUserName(e.target.value)}
+        onKeyDown={(e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            handleStart(e);
+          }
+        }}
       />
       {userName && (
         <button
-          to="/Menu"
-          className="mb-3 rounded-full bg-stone-700 px-4 py-3 text-sm uppercase text-white"
+          type="button"
+          className="mb-3 cursor-pointer rounded-full bg-stone-700 px-4 py-3 text-sm uppercase text-white"
           onClick={handleStart}
         >
           start ordering

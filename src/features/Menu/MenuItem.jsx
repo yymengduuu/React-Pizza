@@ -23,6 +23,7 @@ export default function MenuItem({ pizza }) {
       totalPrice: unitPrice * 1,
     };
     dispatch(addItem(newItem));
+    console.log('Add item:', newItem);
   };
 
   const handleDelete = (e) => {
@@ -47,7 +48,6 @@ export default function MenuItem({ pizza }) {
           <p className="py-5 text-stone-700">$ {unitPrice}.00</p>
         )}
       </div>
-
       {quantity > 0 ? (
         <div className="flex flex-grow items-center gap-3">
           <UpdateCartQuantity id={id} quantity={quantity} />
