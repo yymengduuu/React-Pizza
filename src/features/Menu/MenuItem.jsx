@@ -1,4 +1,7 @@
-import { currentCartQuantity } from '../../features/Cart/cartSlice.js';
+import {
+  currentCartQuantity,
+  deleteItem,
+} from '../../features/Cart/cartSlice.js';
 import { useSelector, useDispatch } from 'react-redux';
 import { addItem } from '../../features/Cart/cartSlice.js';
 import UpdateCartQuantity from '../Cart/UpdateCartQuantity.jsx';
@@ -22,6 +25,12 @@ export default function MenuItem({ pizza }) {
     dispatch(addItem(newItem));
   };
 
+  const handleDelete = (e) => {
+    e.preventDefault();
+
+    dispatch(deleteItem(id));
+  };
+
   return (
     <li className="grid grid-cols-[auto_1fr_auto] items-center gap-10 border-b border-gray-300 py-4">
       <img
@@ -40,7 +49,15 @@ export default function MenuItem({ pizza }) {
       </div>
 
       {quantity > 0 ? (
-        <UpdateCartQuantity id={id} quantity={quantity} />
+        <div className="flex flex-grow items-center gap-3">
+          <UpdateCartQuantity id={id} quantity={quantity} />
+          <button
+            className="min-w-[120px] rounded-full bg-stone-700 px-4 py-3 text-center text-sm uppercase text-white"
+            onClick={handleDelete}
+          >
+            delete
+          </button>
+        </div>
       ) : (
         !soldOut && (
           <button
