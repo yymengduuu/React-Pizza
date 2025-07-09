@@ -8,14 +8,14 @@ export default function UpdateCartQuantity({ id, quantity }) {
     <div>
       <button
         className="rounded-full"
-        onClick={() => dispatch(increaseItemQuantity(id))}
+        onClick={() => dispatch(decreaseItemQuantity(id))}
       >
         -
       </button>
       <span>{quantity}</span>
       <button
         className="rounded-full"
-        onClick={() => dispatch(decreaseItemQuantity(id))}
+        onClick={() => dispatch(increaseItemQuantity(id))}
       >
         +
       </button>

@@ -1,11 +1,17 @@
 import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 export default function CartOverview() {
+  const cartItems = useSelector((state) => state.cart.items);
   const navigate = useNavigate();
   const handleOpen = (e) => {
     e.preventDefault();
     navigate('/Cart');
   };
+
+  if (cartItems.length === 0) {
+    return null;
+  }
   return (
     <div className="fixed bottom-0 left-0 right-0 z-50 flex flex-row justify-between bg-stone-800 px-3 py-4 text-white md:text-base">
       <p className="flex justify-start gap-4">X Pizzas</p>
