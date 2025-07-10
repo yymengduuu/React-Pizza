@@ -7,14 +7,14 @@ export default function UpdateCartQuantity({ id, quantity }) {
   return (
     <div>
       <button
-        className="inline-block rounded-full bg-orange-400 px-2 py-0.5 text-sm text-black md:px-3.5 md:py-2"
+        className="inline-block rounded-full bg-orange-400 px-2 py-0.5 text-sm text-black hover:bg-orange-500 md:px-3.5 md:py-2"
         onClick={() => dispatch(decreaseItemQuantity(id))}
       >
         -
       </button>
       <span className="mx-3">{quantity}</span>
       <button
-        className="rounded-full bg-orange-400 px-2 py-0.5 text-sm text-black md:px-3.5 md:py-2"
+        className="rounded-full bg-orange-400 px-2 py-0.5 text-sm text-black hover:bg-orange-500 md:px-3.5 md:py-2"
         onClick={() => dispatch(increaseItemQuantity(id))}
       >
         +

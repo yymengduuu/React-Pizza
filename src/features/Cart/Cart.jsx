@@ -34,10 +34,10 @@ export default function Cart() {
               <CartItem item={item} key={item.id} />
             ))}
           </ul>
-          <button className="mr-4 min-w-[120px] rounded-full bg-orange-400 px-4 py-3 text-center text-sm uppercase text-white">
+          <button className="mr-4 min-w-[120px] rounded-full bg-orange-400 px-4 py-3 text-center text-sm uppercase text-white hover:bg-orange-500">
             check out
           </button>
-          <button className="min-w-[120px] rounded-full bg-stone-700 px-4 py-3 text-center text-sm uppercase text-white">
+          <button className="min-w-[120px] rounded-full bg-stone-700 px-4 py-3 text-center text-sm uppercase text-white hover:bg-stone-500">
             clear cart
           </button>
         </>

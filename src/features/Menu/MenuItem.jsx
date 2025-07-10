@@ -52,7 +52,7 @@ export default function MenuItem({ pizza }) {
         <div className="flex flex-grow items-center gap-3">
           <UpdateCartQuantity id={id} quantity={quantity} />
           <button
-            className="min-w-[120px] rounded-full bg-stone-700 px-4 py-3 text-center text-sm uppercase text-white"
+            className="min-w-[120px] rounded-full bg-stone-700 px-4 py-3 text-center text-sm uppercase text-white hover:bg-stone-500"
             onClick={handleDelete}
           >
             delete
@@ -61,7 +61,7 @@ export default function MenuItem({ pizza }) {
       ) : (
         !soldOut && (
           <button
-            className="min-w-[120px] rounded-full bg-stone-700 px-4 py-3 text-center text-sm uppercase text-white"
+            className="min-w-[120px] rounded-full bg-stone-700 px-4 py-3 text-center text-sm uppercase text-white hover:bg-stone-500"
             onClick={handleAdd}
           >
             add to cart

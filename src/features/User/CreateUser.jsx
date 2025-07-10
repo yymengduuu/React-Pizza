@@ -19,6 +19,9 @@ export default function CreateUser() {
 
   return (
     <div className="flex flex-col items-center justify-center">
+      <p className="mb-16 text-lg font-medium text-gray-800">
+        👋 Welcome! Please start by telling us your name:
+      </p>
       <input
         className="mb-8 rounded-full border-gray-900 px-8 py-4 text-center text-stone-700"
         placeholder="Your full name"
@@ -33,7 +36,7 @@ export default function CreateUser() {
       {userName && (
         <button
           type="button"
-          className="mb-3 cursor-pointer rounded-full bg-stone-700 px-4 py-3 text-sm uppercase text-white"
+          className="mb-3 cursor-pointer rounded-full bg-stone-700 px-4 py-3 text-sm uppercase text-white hover:bg-stone-500"
           onClick={handleStart}
         >
           start ordering
