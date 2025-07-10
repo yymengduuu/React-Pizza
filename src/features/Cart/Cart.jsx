@@ -6,7 +6,7 @@ import { getCartItems } from './cartSlice';
 export default function Cart() {
   const username = useSelector((state) => state.user.userName);
   const cartItems = useSelector(getCartItems);
-  console.log('cartItems:', cartItems);
+  // console.log('cartItems:', cartItems);
 
   const navigate = useNavigate();
   const hanldeBack = (e) => {

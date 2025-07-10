@@ -4,6 +4,7 @@ import { deleteItem } from './cartSlice';
 
 export default function CartItem({ item }) {
   const { id, name, quantity, totalPrice } = item;
+  // Props passed down from the parent component: item
 
   const dispatch = useDispatch();
   const handleDelete = (e) => {

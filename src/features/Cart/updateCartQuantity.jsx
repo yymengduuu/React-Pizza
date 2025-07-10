@@ -12,7 +12,7 @@ export default function UpdateCartQuantity({ id, quantity }) {
       >
         -
       </button>
-      <span> {quantity} </span>
+      <span className="mx-3">{quantity}</span>
       <button
         className="rounded-full bg-orange-400 px-2 py-0.5 text-sm text-black md:px-3.5 md:py-2"
         onClick={() => dispatch(increaseItemQuantity(id))}
