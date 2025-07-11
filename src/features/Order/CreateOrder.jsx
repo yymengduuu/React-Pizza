@@ -26,7 +26,7 @@ export default function CreateOrder() {
           className="w-full rounded-xl border-2 border-orange-400 px-3 py-2 text-sm focus:border-orange-600 focus:outline-none"
           type="tel"
           name="number"
-          defaultValue="+44 "
+          placeholder="+44 xxx xxx xxxx"
           required
         />
       </div>
