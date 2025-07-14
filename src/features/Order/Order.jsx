@@ -1,6 +1,7 @@
 import OrderItem from './OrderItem';
 import { getCartItems } from '../Cart/cartSlice';
 import { useSelector } from 'react-redux';
+import CountdownTimer from '../../utils/helpers';
 
 export default function Order() {
   const OrderItems = useSelector(getCartItems);
@@ -19,13 +20,9 @@ export default function Order() {
     >
       <div className="mx-auto max-w-2xl px-6 py-10">
         <div className="flex flex-wrap justify-between py-4">
-          <p>Order X status</p>
-          <span>preparing order</span>
+          <p>Order {Math.floor(Math.random() * 100) + 1} status</p>
         </div>
-        <div className="mb-6 flex flex-wrap justify-between rounded-lg bg-stone-300 px-2 py-4">
-          <p>Only X minutes left 😃</p>
-          <p>(Estimated delivery: Jul 11, 03:51 PM)</p>
-        </div>
+        <CountdownTimer />
         <ul className="mb-6 flex flex-col gap-3 divide-y divide-stone-200 border-y border-stone-200">
           {OrderItems.map((item) => (
             <OrderItem item={item} key={item.id} />
