@@ -1,11 +1,13 @@
 import OrderItem from './OrderItem';
 import { getCartItems } from '../Cart/cartSlice';
 import { useSelector } from 'react-redux';
-import { totalCartPrice } from '../Cart/cartSlice';
 
 export default function Order() {
   const OrderItems = useSelector(getCartItems);
-  const totalPrice = useSelector(totalCartPrice);
+  const totalPrice = useSelector((state) => state.order.totalPrice);
+  const priorityFee = useSelector((state) => state.order.priorityFee);
+  const pizzaPrice = useSelector((state) => state.order.pizzaPrice);
+
   return (
     <div
       className="min-h-screen w-full bg-cover bg-center bg-no-repeat px-6 py-10"
@@ -31,13 +33,10 @@ export default function Order() {
         </ul>
 
         <div className="flex flex-col gap-2 rounded-lg bg-stone-300 px-2 py-4">
-          <p>Price pizza: &pound; {totalPrice}.00</p>
-          <p>To pay on delivery: &pound; 1.00</p>
-        </div>
-        <div className="flex flex-row items-end justify-end py-6">
-          <button className="min-w-[120px] rounded-full bg-orange-400 px-4 py-3 text-center text-sm uppercase text-white hover:bg-orange-500">
-            Make priority
-          </button>
+          <p>Price pizza: &pound; {pizzaPrice}.00</p>
+          <p>Price priority: &pound; {priorityFee}</p>
+          <p>Price delivery: &pound; 4.50</p>
+          <p>Total Cost: &pound; {totalPrice}</p>
         </div>
       </div>
     </div>

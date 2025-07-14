@@ -1,15 +1,26 @@
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { setPriorityFee, setTotalPrice, setPizzaPrice } from './orderSlice';
 import { totalCartPrice } from '../Cart/cartSlice';
 import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 
 export default function CreateOrder() {
   const username = useSelector((state) => state.user.userName);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const totalPrice = useSelector(totalCartPrice);
+
+  const [priority, setPriority] = useState(false);
+  const deliveryFee = 4.5;
+  const priorityFee = priority ? 10 : 0;
+  const finalPrice = (totalPrice + deliveryFee + priorityFee).toFixed(2);
 
   const handleCheckout = (e) => {
     e.preventDefault();
-    navigate('/Order/Order');
+    dispatch(setPriorityFee(priorityFee));
+    dispatch(setPizzaPrice(totalPrice));
+    dispatch(setTotalPrice(finalPrice));
+    navigate('/Order/Status');
   };
 
   return (
@@ -54,20 +65,25 @@ export default function CreateOrder() {
             required
           />
         </div>
-        <div className="mb-6 flex flex-row items-center gap-5">
+        <div className="mb-3 flex flex-row items-center gap-5">
           <input
             name="priority"
             id="priority"
             type="checkbox"
+            onChange={(e) => setPriority(e.target.checked)}
             className="h-4 w-4 accent-orange-400 focus:outline-none focus:ring-orange-600"
           />
           <label className="text-lg">Want to give your order priority?</label>
         </div>
+        <p className="mb-6 text-sm text-stone-600">
+          Priority orders are delivered in 20 minutes with an extra £10 delivery
+          fee.
+        </p>
         <button
           className="mr-4 min-w-[120px] rounded-full bg-orange-400 px-4 py-3 text-center text-sm uppercase text-white hover:bg-orange-500"
           onClick={handleCheckout}
         >
-          order now from &pound; {totalPrice}.00
+          order now from &pound; {finalPrice}
         </button>
       </div>
     </div>

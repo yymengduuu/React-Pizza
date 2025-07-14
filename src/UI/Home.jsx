@@ -30,7 +30,7 @@ export default function Home() {
       {username ? (
         <button
           type="button"
-          className="mb-3 cursor-pointer rounded-full bg-orange-400 px-4 py-3 text-sm uppercase text-white hover:bg-orange-500"
+          className="mb-3 cursor-pointer rounded-full bg-orange-400 px-4 py-3 text-sm text-white hover:bg-orange-500"
           onClick={handleStart}
         >
           continue ordering, {username}
@@ -38,6 +38,10 @@ export default function Home() {
       ) : (
         <CreateUser />
       )}
+      <footer className="text-m mt-16 text-gray-600">
+        We promise to deliver your pizza within 30 minutes. Priority orders are
+        delivered in just 20 minutes!
+      </footer>
     </div>
   );
 }
