@@ -20,7 +20,7 @@ export default function Order() {
           <p>Order X status</p>
           <span>preparing order</span>
         </div>
-        <div className="mb-6 flex flex-wrap justify-between rounded-full bg-stone-300 px-2 py-4">
+        <div className="mb-6 flex flex-wrap justify-between rounded-lg bg-stone-300 px-2 py-4">
           <p>Only X minutes left 😃</p>
           <p>(Estimated delivery: Jul 11, 03:51 PM)</p>
         </div>
