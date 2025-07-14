@@ -1,15 +1,10 @@
 import CreateUser from '../features/User/CreateUser';
 import { useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+
+import Button from './Button';
 
 export default function Home() {
   const username = useSelector((state) => state.user.userName);
-  const navigate = useNavigate();
-
-  const handleStart = (e) => {
-    e.preventDefault();
-    navigate('/Menu');
-  };
 
   return (
     <div
@@ -20,7 +15,7 @@ export default function Home() {
         backgroundBlendMode: 'lighten',
       }}
     >
-      <h1 className="mb-24 text-5xl font-bold text-gray-900 drop-shadow-xl md:text-5xl">
+      <h1 className="mb-24 text-5xl font-bold text-gray-900 md:text-5xl">
         The best pizza .
       </h1>
       <h2 className="mb-16 text-3xl font-semibold text-gray-700">
@@ -28,13 +23,9 @@ export default function Home() {
       </h2>
 
       {username ? (
-        <button
-          type="button"
-          className="mb-3 cursor-pointer rounded-full bg-orange-400 px-4 py-3 text-sm text-white hover:bg-orange-500"
-          onClick={handleStart}
-        >
+        <Button type="orangeButton" to="/Menu">
           continue ordering, {username}
-        </button>
+        </Button>
       ) : (
         <CreateUser />
       )}
