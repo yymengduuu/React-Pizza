@@ -1,24 +1,23 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
 
 export default function CountdownTimer() {
   const priorityFee = useSelector((state) => state.order.priorityFee);
 
   const deliveryDuration = priorityFee > 0 ? 20 : 30;
-  const estimatedDeliveryTime =
-    new Date().getTime() + deliveryDuration * 60 * 1000;
-
+  const estimatedDeliveryTimeRef = useRef(
+    new Date().getTime() + deliveryDuration * 60 * 1000,
+  );
   const [timeLeft, setTimeLeft] = useState(() =>
-    calculateTimeLeft(estimatedDeliveryTime),
+    calculateTimeLeft(estimatedDeliveryTimeRef.current),
   );
 
   useEffect(() => {
     const timer = setInterval(() => {
-      setTimeLeft(calculateTimeLeft(estimatedDeliveryTime));
+      setTimeLeft(calculateTimeLeft(estimatedDeliveryTimeRef.current));
     }, 1000);
-
     return () => clearInterval(timer);
-  }, [estimatedDeliveryTime]);
+  }, []);
 
   function calculateTimeLeft(targetTime) {
     const currentTime = new Date().getTime();
@@ -42,16 +41,15 @@ export default function CountdownTimer() {
     );
   }
 
-  const estimatedTimeFormatted = new Date(estimatedDeliveryTime).toLocaleString(
-    'en-GB',
-    {
-      month: 'short',
-      day: '2-digit',
-      hour: '2-digit',
-      minute: '2-digit',
-      hour12: true,
-    },
-  );
+  const estimatedTimeFormatted = new Date(
+    estimatedDeliveryTimeRef.current,
+  ).toLocaleString('en-GB', {
+    month: 'short',
+    day: '2-digit',
+    hour: '2-digit',
+    minute: '2-digit',
+    hour12: true,
+  });
 
   return (
     <div className="mb-6 flex flex-wrap justify-between rounded-lg bg-stone-300 px-2 py-4">

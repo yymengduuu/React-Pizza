@@ -9,10 +9,7 @@ export default function Header() {
       <Link to="/" className="uppercase">
         FirePie Express pizza co.{' '}
       </Link>
-      <input
-        className="rounded-full bg-white text-center text-stone-100"
-        placeholder="Search order # "
-      />
+
       {username ? <div className="font-mono text-black">{username}</div> : null}
     </header>
   );
