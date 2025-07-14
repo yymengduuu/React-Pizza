@@ -1,18 +1,45 @@
-import CreateOrder from './CreateOrder';
-import CartOverview from '../Cart/CartOverview';
+import OrderItem from './OrderItem';
+import { getCartItems } from '../Cart/cartSlice';
+import { useSelector } from 'react-redux';
+import { totalCartPrice } from '../Cart/cartSlice';
 
 export default function Order() {
+  const OrderItems = useSelector(getCartItems);
+  const totalPrice = useSelector(totalCartPrice);
   return (
     <div
-      className="min-h-screen w-full bg-cover bg-center bg-no-repeat px-4"
+      className="min-h-screen w-full bg-cover bg-center bg-no-repeat px-6 py-10"
       style={{
         backgroundImage: "url('/images/bg-pizza.jpg')",
         backgroundColor: 'rgba(255,255,255,0.85)',
         backgroundBlendMode: 'lighten',
       }}
     >
-      <CreateOrder />
-      <CartOverview />
+      <div className="mx-auto max-w-2xl px-6 py-10">
+        <div className="flex flex-wrap justify-between py-4">
+          <p>Order X status</p>
+          <span>preparing order</span>
+        </div>
+        <div className="mb-6 flex flex-wrap justify-between rounded-full bg-stone-300 px-2 py-4">
+          <p>Only X minutes left 😃</p>
+          <p>(Estimated delivery: Jul 11, 03:51 PM)</p>
+        </div>
+        <ul className="mb-6 flex flex-col gap-3 divide-y divide-stone-200 border-y border-stone-200">
+          {OrderItems.map((item) => (
+            <OrderItem item={item} key={item.id} />
+          ))}
+        </ul>
+
+        <div className="flex flex-col gap-2 rounded-lg bg-stone-300 px-2 py-4">
+          <p>Price pizza: &pound; {totalPrice}.00</p>
+          <p>To pay on delivery: &pound; 1.00</p>
+        </div>
+        <div className="flex flex-row items-end justify-end py-6">
+          <button className="min-w-[120px] rounded-full bg-orange-400 px-4 py-3 text-center text-sm uppercase text-white hover:bg-orange-500">
+            Make priority
+          </button>
+        </div>
+      </div>
     </div>
   );
 }

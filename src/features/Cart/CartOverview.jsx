@@ -20,7 +20,9 @@ export default function CartOverview() {
     <div className="fixed bottom-0 left-0 right-0 z-50 flex flex-row items-center justify-between bg-stone-800 px-10 py-4 text-white md:text-base">
       <p>{totalQuantity} Pizzas</p>
       <p>&pound; {totalPrice}.00</p>
-      <button onClick={handleOpen}>Open cart &rarr;</button>
+      <button onClick={handleOpen} className="uppercase">
+        Open cart &rarr;
+      </button>
     </div>
   );
 }

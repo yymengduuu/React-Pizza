@@ -18,6 +18,7 @@ export default function MenuItem({ pizza }) {
     const newItem = {
       id,
       name,
+      ingredients,
       quantity: 1,
       unitPrice,
       totalPrice: unitPrice * 1,

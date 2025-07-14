@@ -18,7 +18,7 @@ export default function Cart() {
 
   const handleCheckout = (e) => {
     e.preventDefault();
-    navigate('/Order');
+    navigate('/Order/CreateOrder');
   };
 
   return (

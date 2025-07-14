@@ -10,7 +10,6 @@ export default function CreateUser() {
 
   const handleStart = (e) => {
     e.preventDefault();
-
     if (userName) {
       dispatch(updateName(userName));
       navigate('/Menu');
@@ -28,7 +27,7 @@ export default function CreateUser() {
         value={userName}
         onChange={(e) => setUserName(e.target.value)}
         onKeyDown={(e) => {
-          if (e.key === 'Enter' || e.key === ' ') {
+          if (e.key === 'Enter') {
             handleStart(e);
           }
         }}
