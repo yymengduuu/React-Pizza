@@ -54,7 +54,7 @@ const deliveryTimeRef = useRef(Date.now() + deliveryDuration * 60 * 1000);
 
 - Users can increase/decrease item quantity in cart
 - Quantity capped at 10 per item
-- - button becomes disabled once quantity reaches 10
+- **+**button becomes disabled once quantity reaches 10
 
 ```
 <button disabled={quantity >= 10}>+</button>
@@ -67,3 +67,26 @@ const deliveryTimeRef = useRef(Date.now() + deliveryDuration * 60 * 1000);
 - userSlice – stores user name
 - cartSlice – handles cart items, quantity, total price
 - orderSlice – handles order summary, fees, final total
+
+---
+
+## 📂 Project Structure
+
+src/
+│
+├── features/
+│ ├── Cart/
+│ │ ├── cartSlice.js
+│ │ └── UpdateCartQuantity.jsx
+│ ├── Order/
+│ │ ├── CreateOrder.jsx
+│ │ ├── Order.jsx
+│ │ └── orderSlice.js
+│ └── User/
+│ └── userSlice.js
+│
+├── utils/
+│ └── CountdownTimer.jsx
+│
+├── App.jsx
+└── main.jsx
