@@ -1,70 +1,69 @@
-# Getting Started with Create React App
+# 🍕 FirePie Express Pizza Ordering App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Welcome to **FirePie Express**, a fully responsive pizza ordering web application built with **React**, **Redux Toolkit**, and **Tailwind CSS**. This app allows users to browse pizzas, customize orders, manage cart quantities, and simulate delivery countdown—all in one seamless experience.
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+## ✨ Features
 
-### `npm start`
+- ✅ View and customize pizzas from the menu
+- ✅ Add items to cart, adjust quantity (max 10 per item)
+- ✅ Form validation for customer info (with phone regex check)
+- ✅ Priority order option with extra fee and faster delivery time
+- ✅ Order summary page with a live delivery countdown timer
+- ✅ Fully responsive design and mobile-friendly UI
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+---
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## 🛠️ Tech Stack
 
-### `npm test`
+| Category      | Tech Used                        |
+| ------------- | -------------------------------- |
+| Frontend      | React, Vite                      |
+| State Mgmt    | Redux Toolkit                    |
+| Styling       | Tailwind CSS                     |
+| Routing       | React Router                     |
+| Form Handling | React built-in form + validation |
+| Deployment    | GitHub Pages / Vercel (optional) |
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+---
 
-### `npm run build`
+## 🚚 Delivery Timer Logic
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+A dynamic delivery countdown is implemented using `useRef` + `useEffect` + `setInterval` to simulate the time left until delivery.  
+It updates every second and visually reflects when the order has been delivered.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```
+const deliveryTimeRef = useRef(Date.now() + deliveryDuration * 60 * 1000);
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+---
 
-### `npm run eject`
+## 🔐 Form Validation
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+- Uses required HTML attributes for basic validation.
+- Custom validation added for UK phone number using:
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```
+/^\+44\s?\d{3}\s?\d{3}\s?\d{4}$/
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+---
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## ➕ Cart Quantity Logic
 
-## Learn More
+- Users can increase/decrease item quantity in cart
+- Quantity capped at 10 per item
+- - button becomes disabled once quantity reaches 10
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```
+<button disabled={quantity >= 10}>+</button>
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+---
 
-### Code Splitting
+## 🧪 Available Redux Slices
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- userSlice – stores user name
+- cartSlice – handles cart items, quantity, total price
+- orderSlice – handles order summary, fees, final total
