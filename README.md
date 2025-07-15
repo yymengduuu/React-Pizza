@@ -70,23 +70,25 @@ const deliveryTimeRef = useRef(Date.now() + deliveryDuration * 60 * 1000);
 
 ---
 
-## 📂 Project Structure
+## 🧪 How to Run
 
-src/
-│
-├── features/
-│ ├── Cart/
-│ │ ├── cartSlice.js
-│ │ └── UpdateCartQuantity.jsx
-│ ├── Order/
-│ │ ├── CreateOrder.jsx
-│ │ ├── Order.jsx
-│ │ └── orderSlice.js
-│ └── User/
-│ └── userSlice.js
-│
-├── utils/
-│ └── CountdownTimer.jsx
-│
-├── App.jsx
-└── main.jsx
+# 1. Clone the repo
+
+git clone https://github.com/yourusername/firepie-pizza-app.git
+
+# 2. Install dependencies
+
+npm install
+
+# 3. Run locally
+
+npm run dev
+
+---
+
+## 🙋‍♀️ Author
+
+Created with ❤️ by [your name].
+For any questions, feel free to reach out or open an issue.
+
+---
