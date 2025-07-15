@@ -19,6 +19,21 @@ export default function CreateOrder() {
 
   const handleCheckout = (e) => {
     e.preventDefault();
+
+    const phoneData = new FormData(e.target).get('number')?.trim();
+
+    const newErrors = {};
+
+    if (!phoneData || !/^\+44\s?\d{3}\s?\d{3}\s?\d{4}$/.test(phoneData))
+      newErrors.phone = 'Enter a valid UK phone number';
+
+    if (Object.keys(newErrors).length > 0) {
+      setError(newErrors);
+      return;
+    }
+
+    setError({});
+
     dispatch(setPriorityFee(priorityFee));
     dispatch(setPizzaPrice(totalPrice));
     dispatch(setTotalPrice(finalPrice));
@@ -49,6 +64,7 @@ export default function CreateOrder() {
               required
             />
           </div>
+
           <div className="mb-6 flex grow gap-2">
             <label className="py-2 text-lg sm:basis-40">Phone number</label>
             <input
@@ -59,6 +75,9 @@ export default function CreateOrder() {
               required
             />
           </div>
+          {error.phone && (
+            <p className="mb-6 text-sm text-red-500">{error.phone}</p>
+          )}
           <div className="mb-6 flex grow gap-2">
             <label className="py-2 text-lg sm:basis-40">Address</label>
             <input
@@ -68,6 +87,7 @@ export default function CreateOrder() {
               required
             />
           </div>
+          {error.address && <p>{error.address}</p>}
           <div className="mb-3 flex flex-row items-center gap-5">
             <input
               name="priority"
@@ -76,6 +96,7 @@ export default function CreateOrder() {
               onChange={(e) => setPriority(e.target.checked)}
               className="h-4 w-4 accent-orange-400 focus:outline-none focus:ring-orange-600"
             />
+
             <label className="text-lg">Want to give your order priority?</label>
           </div>
           <p className="mb-6 text-sm text-stone-600">
