@@ -5,9 +5,11 @@ export default function CountdownTimer() {
   const priorityFee = useSelector((state) => state.order.priorityFee);
 
   const deliveryDuration = priorityFee > 0 ? 20 : 30;
+
   const estimatedDeliveryTimeRef = useRef(
     new Date().getTime() + deliveryDuration * 60 * 1000,
   );
+
   const [timeLeft, setTimeLeft] = useState(() =>
     calculateTimeLeft(estimatedDeliveryTimeRef.current),
   );
@@ -16,8 +18,15 @@ export default function CountdownTimer() {
     const timer = setInterval(() => {
       setTimeLeft(calculateTimeLeft(estimatedDeliveryTimeRef.current));
     }, 1000);
+    //  1000ms = 1s
+
     return () => clearInterval(timer);
   }, []);
+
+  // const timerId = setInterval(() => {
+  //   console.log('每隔 1 秒打印一次');
+  // }, 1000);
+  // clearInterval(timerId); (停止上面的 setInterval)
 
   function calculateTimeLeft(targetTime) {
     const currentTime = new Date().getTime();
@@ -56,6 +65,7 @@ export default function CountdownTimer() {
       <p className="flex flex-row gap-2">
         Only {String(timeLeft.minutes).padStart(2, '0')}:
         {String(timeLeft.seconds).padStart(2, '0')} minutes left 😃
+        {/* str.padStart(targetLength, padString) */}
       </p>
       <p>(Estimated delivery: {estimatedTimeFormatted})</p>
     </div>
