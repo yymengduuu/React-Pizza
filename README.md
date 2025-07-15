@@ -72,15 +72,15 @@ const deliveryTimeRef = useRef(Date.now() + deliveryDuration * 60 * 1000);
 
 ## 🧪 How to Run
 
-# 1. Clone the repo
+1. Clone the repo
 
 git clone https://github.com/yourusername/firepie-pizza-app.git
 
-# 2. Install dependencies
+2. Install dependencies
 
 npm install
 
-# 3. Run locally
+3. Run locally
 
 npm run dev
 
