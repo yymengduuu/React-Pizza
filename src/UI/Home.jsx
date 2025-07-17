@@ -1,6 +1,7 @@
 import CreateUser from '../features/User/CreateUser';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import bgPizza from '../../assets/bg-pizza.jpg';
 
 export default function Home() {
   const username = useSelector((state) => state.user.userName);
@@ -15,7 +16,7 @@ export default function Home() {
     <div
       className="min-h-screen w-full bg-cover bg-center bg-no-repeat px-4 py-32 text-center font-serif"
       style={{
-        backgroundImage: "url('/images/bg-pizza.jpg')",
+        backgroundImage: `url(${bgPizza})`,
         backgroundColor: 'rgba(255,255,255,0.85)',
         backgroundBlendMode: 'lighten',
       }}
