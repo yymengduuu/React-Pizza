@@ -1,7 +1,7 @@
 import CreateUser from '../features/User/CreateUser';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import bgPizza from '../../assets/bg-pizza.jpg';
+import bgPizza from '../assets/bg-pizza.jpg';
 
 export default function Home() {
   const username = useSelector((state) => state.user.userName);
