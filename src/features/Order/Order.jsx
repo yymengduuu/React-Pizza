@@ -16,7 +16,7 @@ export default function Order() {
   const handleNewOrder = (e) => {
     e.preventDefault();
     dispatch(clearCart());
-    navigate('../Menu');
+    navigate('#/Menu');
   };
 
   return (

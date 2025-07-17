@@ -8,7 +8,7 @@ export default function Home() {
 
   const handleStart = (e) => {
     e.preventDefault();
-    navigate('/Menu');
+    navigate('#/Menu');
   };
 
   return (

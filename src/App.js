@@ -1,4 +1,4 @@
-import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+import { RouterProvider, createHashRouter } from 'react-router-dom';
 // import { RouterProvider, createBrowserRouter } from 'react-router-dom'; （github不支持子路径刷新）
 import './App.css';
 import AppLayout from './UI/AppLayout';

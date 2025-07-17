@@ -12,7 +12,7 @@ export default function CreateUser() {
     e.preventDefault();
     if (userName) {
       dispatch(updateName(userName));
-      navigate('/Menu');
+      navigate('#/Menu');
     }
   };
 
