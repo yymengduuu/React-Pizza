@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import CountdownTimer from '../../utils/helpers';
 import { useNavigate } from 'react-router-dom';
 import { clearCart } from '../Cart/cartSlice';
+import bgPizza from '../../assets/bg-pizza.jpg';
 
 export default function Order() {
   const OrderItems = useSelector(getCartItems);
@@ -23,7 +24,7 @@ export default function Order() {
     <div
       className="min-h-screen w-full bg-cover bg-center bg-no-repeat px-6 py-10"
       style={{
-        backgroundImage: "url('/images/bg-pizza.jpg')",
+        backgroundImage: `url(${bgPizza})`,
         backgroundColor: 'rgba(255,255,255,0.85)',
         backgroundBlendMode: 'lighten',
       }}

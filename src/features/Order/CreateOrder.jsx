@@ -3,6 +3,7 @@ import { setPriorityFee, setTotalPrice, setPizzaPrice } from './orderSlice';
 import { totalCartPrice } from '../Cart/cartSlice';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
+import bgPizza from '../../assets/bg-pizza.jpg';
 
 export default function CreateOrder() {
   const username = useSelector((state) => state.user.userName);
@@ -44,7 +45,7 @@ export default function CreateOrder() {
     <div
       className="min-h-screen w-full bg-cover bg-center bg-no-repeat px-4"
       style={{
-        backgroundImage: "url('/images/bg-pizza.jpg')",
+        backgroundImage: `url(${bgPizza})`,
         backgroundColor: 'rgba(255,255,255,0.85)',
         backgroundBlendMode: 'lighten',
       }}

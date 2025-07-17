@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import CartItem from './CartItem';
 import { getCartItems, clearCart } from './cartSlice';
 import { totalCartPrice } from './cartSlice';
+import bgPizza from '../../assets/bg-pizza.jpg';
 
 export default function Cart() {
   const username = useSelector((state) => state.user.userName);
@@ -27,7 +28,7 @@ export default function Cart() {
     <div
       className="min-h-screen w-full bg-cover bg-center bg-no-repeat px-4"
       style={{
-        backgroundImage: "url('/images/bg-pizza.jpg')",
+        backgroundImage: `url(${bgPizza})`,
         backgroundColor: 'rgba(255,255,255,0.85)',
         backgroundBlendMode: 'lighten',
       }}
