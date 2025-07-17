@@ -1,4 +1,5 @@
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+// import { RouterProvider, createBrowserRouter } from 'react-router-dom'; （github不支持子路径刷新）
 import './App.css';
 import AppLayout from './UI/AppLayout';
 import Home from './UI/Home';
@@ -7,7 +8,8 @@ import Cart from './features/Cart/Cart';
 import CreateOrder from './features/Order/CreateOrder';
 import Order from './features/Order/Order';
 
-const router = createBrowserRouter([
+// const router = createBrowserRouter([
+const router = createHashRouter([
   {
     path: '/',
     element: <AppLayout />,
