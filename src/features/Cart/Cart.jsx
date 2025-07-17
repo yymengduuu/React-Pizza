@@ -16,7 +16,7 @@ export default function Cart() {
 
   const hanldeBack = (e) => {
     e.preventDefault();
-    navigate('Menu');
+    navigate('/Menu');
   };
 
   const handleCheckout = (e) => {
