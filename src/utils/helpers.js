@@ -25,7 +25,7 @@ export default function CountdownTimer() {
 
   // const timerId = setInterval(() => {
   //   console.log('每隔 1 秒打印一次');
-  // }, 1000);
+  // }, 1000); （1000ms)
   // clearInterval(timerId); (停止上面的 setInterval)
 
   function calculateTimeLeft(targetTime) {
