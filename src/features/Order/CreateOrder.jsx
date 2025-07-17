@@ -37,7 +37,7 @@ export default function CreateOrder() {
     dispatch(setPriorityFee(priorityFee));
     dispatch(setPizzaPrice(totalPrice));
     dispatch(setTotalPrice(finalPrice));
-    navigate('#/Order/Status');
+    navigate('Order/Status');
   };
 
   return (
