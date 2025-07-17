@@ -10,7 +10,7 @@ export default function CartOverview() {
   const navigate = useNavigate();
   const handleOpen = (e) => {
     e.preventDefault();
-    navigate('Cart');
+    navigate('/Cart');
   };
 
   if (cartItems.length === 0) {
