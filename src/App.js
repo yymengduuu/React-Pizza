@@ -3,7 +3,8 @@ import { RouterProvider, createHashRouter } from 'react-router-dom';
 import './App.css';
 import AppLayout from './UI/AppLayout';
 import Home from './UI/Home';
-import Menu, { loader as menuLoader } from './features/Menu/Menu';
+import Menu from './features/Menu/Menu';
+// import { loader as menuLoader } from './features/Menu/Menu';
 import Cart from './features/Cart/Cart';
 import CreateOrder from './features/Order/CreateOrder';
 import Order from './features/Order/Order';
@@ -22,7 +23,7 @@ const router = createHashRouter([
       {
         path: '/Menu',
         element: <Menu />,
-        loader: menuLoader,
+        // loader: menuLoader,
       },
       {
         path: '/Cart',

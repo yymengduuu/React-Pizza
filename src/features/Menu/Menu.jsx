@@ -1,10 +1,20 @@
 import MenuItem from './MenuItem';
-import getMenu from '../../services/apiRestaurant.js';
-import { useLoaderData } from 'react-router-dom';
+// import getMenu from '../../services/apiRestaurant.js';
+// import { useLoaderData } from 'react-router-dom';
 import bgPizza from '../../assets/bg-pizza.jpg';
+import { useEffect, useState } from 'react';
 
 export default function Menu() {
-  const menu = useLoaderData();
+  // const menu = useLoaderData();
+
+  const [pizzas, setPizzas] = useState([]);
+
+  useEffect(() => {
+    fetch('/pizzas')
+      .then((res) => res.json())
+      .then((data) => setPizzas(data))
+      .catch((err) => console.log('Failed to fetch error', err));
+  }, []);
 
   return (
     <>
@@ -17,7 +27,7 @@ export default function Menu() {
         }}
       >
         <ul>
-          {menu.map((pizza) => (
+          {pizzas.map((pizza) => (
             <MenuItem pizza={pizza} key={pizza.id} />
           ))}
         </ul>
@@ -26,7 +36,7 @@ export default function Menu() {
   );
 }
 
-export async function loader() {
-  const menu = await getMenu();
-  return menu;
-}
+// export async function loader() {
+//   const menu = await getMenu();
+//   return menu;
+// }

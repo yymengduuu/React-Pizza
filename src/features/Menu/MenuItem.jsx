@@ -9,7 +9,9 @@ import UpdateCartQuantity from '../Cart/UpdateCartQuantity.jsx';
 export default function MenuItem({ pizza }) {
   const dispatch = useDispatch();
 
-  const { id, imageUrl, name, ingredients, unitPrice, soldOut } = pizza;
+  const { id, imageurl, name, ingredients, unitprice, soldout } = pizza;
+
+  console.log('Pizza data:', pizza);
 
   const quantity = useSelector(currentCartQuantity(id));
 
@@ -20,8 +22,8 @@ export default function MenuItem({ pizza }) {
       name,
       ingredients,
       quantity: 1,
-      unitPrice,
-      totalPrice: unitPrice * 1,
+      unitprice,
+      totalPrice: unitprice * 1,
     };
     dispatch(addItem(newItem));
     console.log('Add item:', newItem);
@@ -36,17 +38,17 @@ export default function MenuItem({ pizza }) {
   return (
     <li className="grid grid-cols-[auto_1fr_auto] items-center gap-10 border-b border-gray-300 py-4">
       <img
-        className={`h-36 ${soldOut ? 'opacity-70 grayscale' : ''}`}
-        src={imageUrl}
+        className={`h-36 ${soldout ? 'opacity-70 grayscale' : ''}`}
+        src={imageurl}
         alt={name}
       />
       <div className="font-serif">
         <p className="text-2xl font-bold text-stone-900">{name}</p>
         <p className="py-4 text-lg text-stone-600">{ingredients.join(', ')}</p>
-        {soldOut ? (
+        {soldout ? (
           <p>Sold Out</p>
         ) : (
-          <p className="py-5 text-stone-700">&pound; {unitPrice}.00</p>
+          <p className="py-5 text-stone-700">&pound; {unitprice}.00</p>
         )}
       </div>
       {quantity > 0 ? (
@@ -60,7 +62,7 @@ export default function MenuItem({ pizza }) {
           </button>
         </div>
       ) : (
-        !soldOut && (
+        !soldout && (
           <button
             className="min-w-[120px] rounded-full bg-stone-700 px-4 py-3 text-center text-sm uppercase text-white hover:bg-stone-500"
             onClick={handleAdd}
