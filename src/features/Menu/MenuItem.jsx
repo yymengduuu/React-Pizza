@@ -11,8 +11,6 @@ export default function MenuItem({ pizza }) {
 
   const { id, imageurl, name, ingredients, unitprice, soldout } = pizza;
 
-  console.log('Pizza data:', pizza);
-
   const quantity = useSelector(currentCartQuantity(id));
 
   const handleAdd = (e) => {
@@ -26,7 +24,6 @@ export default function MenuItem({ pizza }) {
       totalPrice: unitprice * 1,
     };
     dispatch(addItem(newItem));
-    console.log('Add item:', newItem);
   };
 
   const handleDelete = (e) => {

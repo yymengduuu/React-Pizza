@@ -32,12 +32,20 @@ const router = createHashRouter([
         element: <Cart />,
       },
       {
+        path: '/RegisterUser',
+        element: <RegisterUser />,
+      },
+      {
         path: '/Order/CreateOrder',
         element: <CreateOrder />,
       },
       {
         path: '/Order/Status',
         element: <Order />,
+      },
+      {
+        path: '/LoginUser',
+        element: <LoginUser />,
       },
     ],
   },
