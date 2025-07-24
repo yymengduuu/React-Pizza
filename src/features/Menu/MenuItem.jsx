@@ -48,7 +48,7 @@ export default function MenuItem({ pizza }) {
         {soldout ? (
           <p>Sold Out</p>
         ) : (
-          <p className="py-5 text-stone-700">&pound; {unitprice}.00</p>
+          <p className="py-5 text-stone-700">&pound; {unitprice}</p>
         )}
       </div>
       {quantity > 0 ? (

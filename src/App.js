@@ -8,6 +8,8 @@ import Menu from './features/Menu/Menu';
 import Cart from './features/Cart/Cart';
 import CreateOrder from './features/Order/CreateOrder';
 import Order from './features/Order/Order';
+import LoginUser from './features/User/LoginUser.jsx';
+import RegisterUser from './features/User/RegisterUser.jsx';
 
 // const router = createBrowserRouter([
 const router = createHashRouter([

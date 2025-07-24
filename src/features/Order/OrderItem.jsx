@@ -1,5 +1,5 @@
 export default function OrderItem({ item }) {
-  const { quantity, name, unitPrice, ingredients } = item;
+  const { quantity, name, unitprice, ingredients } = item;
   console.log('OrderItem:', item);
 
   return (
@@ -8,9 +8,9 @@ export default function OrderItem({ item }) {
         <p>
           {quantity} x {name}
         </p>
-        <p>&pound; {unitPrice}.00</p>
+        <p>&pound; {unitprice}</p>
       </div>
-      <p className="text-stone-700">{ingredients.join(',')}</p>
+      <p className="text-stone-700">{ingredients.join(', ')}</p>
     </li>
   );
 }

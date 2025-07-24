@@ -10,9 +10,16 @@ export default function Menu() {
   const [pizzas, setPizzas] = useState([]);
 
   useEffect(() => {
-    fetch('/pizzas')
+    fetch('/api/pizzas')
       .then((res) => res.json())
-      .then((data) => setPizzas(data))
+      .then((data) => {
+        if (Array.isArray(data)) {
+          setPizzas(data);
+        } else {
+          console.error('Unexpected API response:', data);
+          setPizzas([]); // 防止 map 报错
+        }
+      })
       .catch((err) => console.log('Failed to fetch error', err));
   }, []);
 
