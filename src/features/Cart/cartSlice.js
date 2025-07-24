@@ -18,14 +18,14 @@ const cartSlice = createSlice({
       const item = state.items.find((item) => item.id === action.payload);
       if (item) {
         item.quantity += 1;
-        item.totalPrice = item.unitPrice * item.quantity;
+        item.totalPrice = item.unitprice * item.quantity;
       }
     },
     decreaseItemQuantity(state, action) {
       const item = state.items.find((item) => item.id === action.payload);
       if (item) {
         item.quantity -= 1;
-        item.totalPrice = item.unitPrice * item.quantity;
+        item.totalPrice = item.unitprice * item.quantity;
       }
       if (item.quantity === 0) {
         state.items = state.items.filter((item) => item.id !== action.payload);
