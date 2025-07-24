@@ -19,7 +19,7 @@ export default function CartItem({ item }) {
         {quantity} x {name}
       </p>
       <UpdateCartQuantity id={id} quantity={quantity} />
-      <p className="ml-4 w-12 text-right">&pound;{totalPrice}.00</p>
+      <p className="ml-4 w-12 text-right">&pound;{totalPrice}</p>
       <button
         className="ml-4 min-w-[120px] rounded-full bg-stone-700 px-4 py-3 text-center text-sm uppercase text-white hover:bg-stone-500"
         onClick={handleDelete}
