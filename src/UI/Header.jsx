@@ -12,7 +12,7 @@ export default function Header() {
       </Link>
 
       {username ? (
-        <div className="font-mono text-black">{username}</div>
+        <Link to="/Order/Status">{username}</Link>
       ) : (
         <Link to="/LoginUser" className="uppercase">
           Login

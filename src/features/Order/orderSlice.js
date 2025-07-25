@@ -4,6 +4,8 @@ const initialState = {
   totalPrice: 0,
   priorityFee: 0,
   pizzaPrice: 0,
+  orders: [],
+  currentOrder: null,
 };
 
 const orderSlice = createSlice({
@@ -19,9 +21,20 @@ const orderSlice = createSlice({
     setPizzaPrice(state, action) {
       state.pizzaPrice = action.payload;
     },
+    setOrders(state, action) {
+      state.orders = action.payload;
+    },
+    setCurrentOrder(state, action) {
+      state.currentOrder = action.payload;
+    },
   },
 });
 
-export const { setTotalPrice, setPriorityFee, setPizzaPrice } =
-  orderSlice.actions;
+export const {
+  setTotalPrice,
+  setPriorityFee,
+  setPizzaPrice,
+  setOrders,
+  setCurrentOrder,
+} = orderSlice.actions;
 export default orderSlice.reducer;

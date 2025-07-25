@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import bgPizza from '../assets/bg-pizza.jpg';
 
 export default function Home() {
-  const username = useSelector((state) => state.user.userName);
+  const username = useSelector((state) => state.user.first_name);
   const navigate = useNavigate();
 
   const handleStart = (e) => {

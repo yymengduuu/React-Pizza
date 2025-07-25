@@ -1,6 +1,5 @@
 export default function OrderItem({ item }) {
   const { quantity, name, unitprice, ingredients } = item;
-  console.log('OrderItem:', item);
 
   return (
     <li>

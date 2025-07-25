@@ -1,14 +1,20 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { setPriorityFee, setTotalPrice, setPizzaPrice } from './orderSlice';
-import { totalCartPrice } from '../Cart/cartSlice';
+import { getCartItems, totalCartPrice, clearCart } from '../Cart/cartSlice';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import bgPizza from '../../assets/bg-pizza.jpg';
 
 export default function CreateOrder() {
-  const username = useSelector((state) => state.user.userName);
+  const username = useSelector((state) => state.user.first_name);
+  const userId = useSelector((state) => state.user.id);
+  const phone = useSelector((state) => state.user.phone);
+  const address = useSelector((state) => state.user.address);
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  const cartItems = useSelector(getCartItems);
   const totalPrice = useSelector(totalCartPrice);
 
   const [priority, setPriority] = useState(false);
@@ -18,27 +24,54 @@ export default function CreateOrder() {
 
   const [error, setError] = useState('');
 
-  const handleCheckout = (e) => {
+  const handleCheckout = async (e) => {
     e.preventDefault();
 
     const phoneData = new FormData(e.target).get('number')?.trim();
 
-    const newErrors = {};
+    // const newErrors = {};
 
     if (!phoneData || !/^\+44\s?\d{3}\s?\d{3}\s?\d{4}$/.test(phoneData))
-      newErrors.phone = 'Enter a valid UK phone number';
+      setError.phone = 'Enter a valid UK phone number';
 
-    if (Object.keys(newErrors).length > 0) {
-      setError(newErrors);
-      return;
+    // if (Object.keys(newErrors).length > 0) {
+    //   setError(newErrors);
+    //   return;
+    // }
+
+    // setError({});
+
+    // dispatch(setPriorityFee(priorityFee));
+    // dispatch(setPizzaPrice(totalPrice));
+    // dispatch(setTotalPrice(finalPrice));
+    // navigate('/Order/Status');
+
+    try {
+      const orderItems = cartItems.map((item) => ({
+        pizzaId: item.id,
+        quantity: item.quantity,
+        unitprice: item.unitprice,
+      }));
+      const res = await fetch('/api/orders', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          userId,
+          phone,
+          address,
+          priority,
+          items: orderItems,
+          total_price: finalPrice,
+        }),
+      });
+      if (!res.ok) throw new Error('Failed to submit order');
+
+      dispatch(clearCart()); // 下单成功后清空购物车
+      navigate('/Order/Status');
+    } catch (err) {
+      console.error('Order creation failed:', err);
+      setError('Order failed. Please try again.');
     }
-
-    setError({});
-
-    dispatch(setPriorityFee(priorityFee));
-    dispatch(setPizzaPrice(totalPrice));
-    dispatch(setTotalPrice(finalPrice));
-    navigate('/Order/Status');
   };
 
   return (
@@ -72,7 +105,7 @@ export default function CreateOrder() {
               className="w-full rounded-xl border-2 border-orange-400 px-3 py-2 text-sm focus:border-orange-600 focus:outline-none"
               type="tel"
               name="number"
-              placeholder="+44 xxx xxx xxxx"
+              defaultValue={phone}
               required
             />
           </div>
@@ -85,6 +118,7 @@ export default function CreateOrder() {
               className="w-full rounded-xl border-2 border-orange-400 px-3 py-2 text-sm focus:border-orange-600 focus:outline-none"
               type="text"
               name="address"
+              defaultValue={address}
               required
             />
           </div>
