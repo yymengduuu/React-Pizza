@@ -38,8 +38,8 @@ export default function CreateUser() {
 
       <button
         type="button"
-        className="mb-3 cursor-pointer rounded-full bg-stone-700 px-4 py-3 text-sm uppercase text-white hover:bg-stone-500"
         onClick={handleStart}
+        className="mr-4 min-w-[120px] rounded-full bg-orange-400 px-4 py-3 text-center text-sm uppercase text-white hover:bg-orange-500"
       >
         start register
       </button>

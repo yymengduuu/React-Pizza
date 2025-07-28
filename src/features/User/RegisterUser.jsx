@@ -53,9 +53,14 @@ export default function Register() {
     >
       <form
         onSubmit={handleSubmit}
-        className="mx-auto mt-10 max-w-md space-y-4"
+        className="mx-auto mt-10 max-w-md space-y-4 border-b pb-4"
       >
-        <h2 className="mb-4 text-xl font-bold">Register</h2>
+        <h2 className="mb-4 border-b pb-4 text-2xl font-bold">
+          Create an Account
+        </h2>
+        <p>
+          Hey! It's quick and easy to set up a Firepie Express Pizza account.
+        </p>
         {error && <p className="text-red-500">{error}</p>}
         {success && <p className="text-green-500">{success}</p>}
 
@@ -86,6 +91,14 @@ export default function Register() {
           Register
         </button>
       </form>
+      <h3 className="mb-4 mt-8 text-xl font-bold">Already Have an Account?</h3>
+      <button
+        type="submit"
+        className="mr-4 min-w-[120px] rounded-full border-2 border-orange-400 bg-white px-4 py-3 text-center text-sm uppercase text-orange-400"
+        onClick={() => navigate('/LoginUser')}
+      >
+        Sign in
+      </button>
     </div>
   );
 }

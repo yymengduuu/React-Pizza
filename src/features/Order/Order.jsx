@@ -9,6 +9,7 @@ import bgPizza from '../../assets/bg-pizza.jpg';
 import { selectUser } from '../User/userSlice.js';
 import { useEffect } from 'react';
 import { setOrders } from './orderSlice.js';
+import { clearUser } from '../User/userSlice.js';
 
 export default function Order() {
   // const OrderItems = useSelector(getCartItems);
@@ -50,6 +51,12 @@ export default function Order() {
     navigate('/Menu');
   };
 
+  const handleLogOut = (e) => {
+    navigate('/');
+    dispatch(clearUser());
+    dispatch(clearCart());
+  };
+
   return (
     <div
       className="min-h-screen w-full bg-cover bg-center bg-no-repeat px-6 py-10"
@@ -66,14 +73,7 @@ export default function Order() {
         {orders.length === 0 ? (
           <>
             <p className="mb-6 py-2 text-lg sm:basis-40">No orders yet.</p>
-            <div className="flex justify-start">
-              <button
-                className="mr-4 min-w-[120px] rounded-full bg-orange-400 px-4 py-3 text-center text-sm uppercase text-white hover:bg-orange-500"
-                onClick={handleNewOrder}
-              >
-                Make a new order
-              </button>
-            </div>
+            <div className="flex justify-end"></div>
           </>
         ) : (
           orders.map((order) => (
@@ -101,11 +101,15 @@ export default function Order() {
                     <div>
                       {item.quantity} × {item.pizza.name}
                     </div>
-                    <div>£{item.unit_price}</div>
+                    <div>£ {item.total_price}</div>
                   </li>
                 ))}
               </ul>
               <div className="felx-row my-2 flex justify-between">
+                <p>Delivery Fee:</p>
+                <p>£ {order.order_status === 'priority' ? 14.5 : 4.5}</p>
+              </div>
+              <div className="felx-row my-2 flex justify-between font-semibold">
                 <p>Your Bill: </p>
                 <p>£{order.total_price}</p>
               </div>
@@ -125,7 +129,15 @@ export default function Order() {
             </div>
           ))
         )}
-        <div className="flex justify-end">
+        <div className="flex justify-end space-x-4">
+          {user.first_name !== 0 && (
+            <button
+              className="mr-4 min-w-[120px] rounded-full bg-orange-500 px-4 py-3 text-center text-sm uppercase text-white hover:bg-orange-500"
+              onClick={handleLogOut}
+            >
+              Log Out
+            </button>
+          )}
           <button
             className="mr-4 min-w-[120px] rounded-full bg-orange-400 px-4 py-3 text-center text-sm uppercase text-white hover:bg-orange-500"
             onClick={handleNewOrder}

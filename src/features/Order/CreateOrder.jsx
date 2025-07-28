@@ -2,17 +2,25 @@ import { useSelector, useDispatch } from 'react-redux';
 // import { setPriorityFee, setTotalPrice, setPizzaPrice } from './orderSlice';
 import { getCartItems, totalCartPrice, clearCart } from '../Cart/cartSlice';
 import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import bgPizza from '../../assets/bg-pizza.jpg';
 
 export default function CreateOrder() {
-  const username = useSelector((state) => state.user.first_name);
-  const userId = useSelector((state) => state.user.id);
-  const phone = useSelector((state) => state.user.phone);
-  const address = useSelector((state) => state.user.address);
+  const user = useSelector((state) => state.user);
+  const username = user.first_name;
+  const userId = user.id;
+  const phone = user.phone;
+  const address = user.address;
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  // 检查用户是否登录，如果没有登录则重定向到登录页面
+  useEffect(() => {
+    if (!user.isLoggedIn || !user.id) {
+      navigate('/LoginUser');
+    }
+  }, [user.isLoggedIn, user.id, navigate]);
 
   const cartItems = useSelector(getCartItems);
   const totalPrice = useSelector(totalCartPrice);
@@ -27,14 +35,21 @@ export default function CreateOrder() {
   const handleCheckout = async (e) => {
     e.preventDefault();
 
-    const phoneData = new FormData(e.target).get('number')?.trim();
+    // 再次检查用户是否登录
+    if (!user.isLoggedIn || !user.id) {
+      setError('Please log in to place an order');
+      navigate('/LoginUser');
+      return;
+    }
+
+    // const phoneData = new FormData(e.target).get('number')?.trim();
 
     // const newErrors = {};
 
-    if (!phoneData || !/^\+44\s?\d{3}\s?\d{3}\s?\d{4}$/.test(phoneData)) {
-      setError('Enter a valid UK phone number');
-      return;
-    }
+    // if (!phoneData || !/^\+44\s?\d{3}\s?\d{3}\s?\d{4}$/.test(phoneData)) {
+    //   setError('Enter a valid UK phone number');
+    //   return;
+    // }
 
     // if (Object.keys(newErrors).length > 0) {
     //   setError(newErrors);

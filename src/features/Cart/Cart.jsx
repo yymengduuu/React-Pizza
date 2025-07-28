@@ -6,7 +6,7 @@ import { totalCartPrice } from './cartSlice';
 import bgPizza from '../../assets/bg-pizza.jpg';
 
 export default function Cart() {
-  const username = useSelector((state) => state.user.userName);
+  const user = useSelector((state) => state.user);
   const cartItems = useSelector(getCartItems);
   const totalPrice = useSelector(totalCartPrice);
   // console.log('cartItems:', cartItems);
@@ -21,7 +21,12 @@ export default function Cart() {
 
   const handleCheckout = (e) => {
     e.preventDefault();
-    navigate('/Order/CreateOrder');
+    // 检查用户是否登录以及是否有有效的用户ID
+    if (!user.isLoggedIn || !user.id || !user.first_name) {
+      navigate('/LoginUser');
+    } else {
+      navigate('/Order/CreateOrder');
+    }
   };
 
   return (
@@ -48,7 +53,7 @@ export default function Cart() {
         ) : (
           <>
             <p className="mb-4 mt-6 text-xl font-semibold">
-              This is your cart, {username}
+              This is your cart, {user.first_name}
             </p>
             <ul className="my-6 divide-y divide-stone-200 border-b border-stone-200">
               {cartItems.map((item) => (

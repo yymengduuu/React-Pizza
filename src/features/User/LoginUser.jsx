@@ -27,15 +27,24 @@ export default function Login() {
     setError('');
 
     try {
-      const res = await fetch('api/users/login', {
+      const res = await fetch('http://localhost:4000/api/users/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),
       });
 
       if (!res.ok) {
-        const { error } = await res.json();
-        throw new Error(error || 'Login failed');
+        const errorData = await res.json();
+
+        if (errorData.errorType === 'EMAIL_NOT_FOUND') {
+          throw new Error(
+            'This email is not registered. Please check your email or register a new account.',
+          );
+        } else if (errorData.errorType === 'WRONG_PASSWORD') {
+          throw new Error('Incorrect password. Please try again.');
+        } else {
+          throw new Error(errorData.error || 'Login failed');
+        }
       }
 
       const userData = await res.json();
@@ -56,9 +65,8 @@ export default function Login() {
         backgroundBlendMode: 'lighten',
       }}
     >
-      <form onSubmit={handleLogin} className="mx-auto max-w-md space-y-4 py-10">
-        <h2 className="mb-4 text-2xl font-bold">Login</h2>
-        {error && <p className="text-red-500">{error}</p>}
+      <form onSubmit={handleLogin} className="mx-auto max-w-md space-y-8 py-10">
+        <h2 className="mb-10 text-3xl font-bold">Sign In</h2>
 
         <input
           type="email"
@@ -67,7 +75,7 @@ export default function Login() {
           onChange={handleChange}
           placeholder="Email"
           required
-          className="w-full rounded-xl border-2 border-orange-400 px-3 py-2 text-sm focus:border-orange-600 focus:outline-none"
+          className="w-full rounded-xl border-2 border-orange-400 px-3 py-2 text-base focus:border-orange-600 focus:outline-none"
         />
         <input
           type="password"
@@ -76,9 +84,13 @@ export default function Login() {
           onChange={handleChange}
           placeholder="Password"
           required
-          className="w-full rounded-xl border-2 border-orange-400 px-3 py-2 text-sm focus:border-orange-600 focus:outline-none"
+          className="mb-4 w-full rounded-xl border-2 border-orange-400 px-3 py-2 text-base focus:border-orange-600 focus:outline-none"
         />
-        {error && <p className="text-sm text-red-500">{error}</p>}
+        {error && (
+          <div className="text-sm">
+            <p className="mb-2 text-base text-red-500">{error}</p>
+          </div>
+        )}
         <button
           className="mr-4 min-w-[120px] rounded-full bg-orange-400 px-4 py-3 text-center text-sm uppercase text-white hover:bg-orange-500"
           type="submit"
