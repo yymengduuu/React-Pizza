@@ -2,7 +2,7 @@
 // import { getCartItems } from '../Cart/cartSlice';
 import { fetchUserOrders, cancelOrder } from '../../services/ api.js';
 import { useSelector, useDispatch } from 'react-redux';
-import CountdownTimer from '../../utils/helpers';
+// import CountdownTimer from '../../utils/helpers';
 import { useNavigate } from 'react-router-dom';
 import { clearCart } from '../Cart/cartSlice';
 import bgPizza from '../../assets/bg-pizza.jpg';
@@ -25,7 +25,10 @@ export default function Order() {
   useEffect(() => {
     if (user.id) {
       fetchUserOrders(user.id)
-        .then((data) => dispatch(setOrders(data)))
+        .then((data) => {
+          console.log('Fetched user orders:', data);
+          dispatch(setOrders(data));
+        })
         .catch((err) => console.error('Error loading orders:', err));
     }
   }, [user.id, dispatch]);
@@ -75,28 +78,61 @@ export default function Order() {
         ) : (
           orders.map((order) => (
             <div key={order.id} className="mb-6 border-b pb-4">
-              <p className="font-semibold">Order #{order.id}</p>
-              <p>Status: {order.order_status}</p>
-              <p>Total: £{order.total_price}</p>
-              <p>Created: {new Date(order.created_at).toLocaleString()}</p>
-              <ul className="list-disc pl-4">
-                {order.items.map((item) => (
-                  <li key={item.id}>
-                    Pizza #{item.pizzaId} - {item.quantity} × £{item.unit_price}
+              <div className="felx-row mb-2 flex justify-between">
+                <p className="mb-3 text-lg font-semibold">Order #{order.id}</p>
+                <span
+                  className={
+                    order.order_status === 'cancelled'
+                      ? 'font-semibold text-red-500'
+                      : order.order_status === 'preparing'
+                        ? 'text-orange-500'
+                        : order.order_status === 'priority'
+                          ? 'text-green-500'
+                          : ''
+                  }
+                >
+                  {order.order_status}
+                </span>
+              </div>
+
+              <ul className="list-disc">
+                {order.order_items.map((item) => (
+                  <li key={item.id} className="flex flex-row justify-between">
+                    <div>
+                      {item.quantity} × {item.pizza.name}
+                    </div>
+                    <div>£{item.unit_price}</div>
                   </li>
                 ))}
               </ul>
-              {order.order_status === 'pending' && (
-                <button
-                  onClick={() => handleCancel(order.id)}
-                  className="mt-2 text-sm text-red-500 underline"
-                >
-                  Cancel this order
-                </button>
-              )}
+              <div className="felx-row my-2 flex justify-between">
+                <p>Your Bill: </p>
+                <p>£{order.total_price}</p>
+              </div>
+              <div className="flex flex-col items-end">
+                <p>Created: {new Date(order.created_at).toLocaleString()}</p>
+                {(order.order_status === 'pending' ||
+                  order.order_status === 'preparing' ||
+                  order.order_status === 'priority') && (
+                  <button
+                    onClick={() => handleCancel(order.id)}
+                    className="mt-2 text-sm text-red-500 underline"
+                  >
+                    Cancel this order
+                  </button>
+                )}
+              </div>
             </div>
           ))
         )}
+        <div className="flex justify-end">
+          <button
+            className="mr-4 min-w-[120px] rounded-full bg-orange-400 px-4 py-3 text-center text-sm uppercase text-white hover:bg-orange-500"
+            onClick={handleNewOrder}
+          >
+            Make a new order
+          </button>
+        </div>
       </div>
     </div>
   );

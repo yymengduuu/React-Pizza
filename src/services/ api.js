@@ -1,7 +1,6 @@
 // 获取用户订单
 export async function fetchUserOrders(userId) {
-  const res = await fetch(`/api/orders/user/${userId}`);
-
+  const res = await fetch(`http://localhost:4000/api/orders/user/${userId}`);
   if (!res.ok) {
     throw new Error('Failed to fetch orders');
   }
@@ -11,9 +10,12 @@ export async function fetchUserOrders(userId) {
 
 // 取消订单
 export async function cancelOrder(orderId) {
-  const res = await fetch(`/api/orders/cancel/${orderId}`, {
-    method: 'PATCH',
-  });
+  const res = await fetch(
+    `http://localhost:4000/api/orders/cancel/${orderId}`,
+    {
+      method: 'PATCH',
+    },
+  );
 
   if (!res.ok) {
     throw new Error('Failed to cancel order');

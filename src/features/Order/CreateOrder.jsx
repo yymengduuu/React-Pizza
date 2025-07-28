@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { setPriorityFee, setTotalPrice, setPizzaPrice } from './orderSlice';
+// import { setPriorityFee, setTotalPrice, setPizzaPrice } from './orderSlice';
 import { getCartItems, totalCartPrice, clearCart } from '../Cart/cartSlice';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
@@ -31,8 +31,10 @@ export default function CreateOrder() {
 
     // const newErrors = {};
 
-    if (!phoneData || !/^\+44\s?\d{3}\s?\d{3}\s?\d{4}$/.test(phoneData))
-      setError.phone = 'Enter a valid UK phone number';
+    if (!phoneData || !/^\+44\s?\d{3}\s?\d{3}\s?\d{4}$/.test(phoneData)) {
+      setError('Enter a valid UK phone number');
+      return;
+    }
 
     // if (Object.keys(newErrors).length > 0) {
     //   setError(newErrors);
@@ -46,17 +48,18 @@ export default function CreateOrder() {
     // dispatch(setTotalPrice(finalPrice));
     // navigate('/Order/Status');
 
+    const orderItems = cartItems.map((item) => ({
+      pizzaId: item.id, // 保持为数字
+      quantity: item.quantity,
+      unit_price: item.unitprice, // 注意要和 Prisma schema 一致，叫 unit_price
+    }));
+
     try {
-      const orderItems = cartItems.map((item) => ({
-        pizzaId: item.id,
-        quantity: item.quantity,
-        unitprice: item.unitprice,
-      }));
-      const res = await fetch('/api/orders', {
+      const res = await fetch('http://localhost:4000/api/orders', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          userId,
+          userId: userId, // 字符串也可以，后端转 BigInt
           phone,
           address,
           priority,
@@ -64,14 +67,25 @@ export default function CreateOrder() {
           total_price: finalPrice,
         }),
       });
-      if (!res.ok) throw new Error('Failed to submit order');
 
-      dispatch(clearCart()); // 下单成功后清空购物车
+      if (!res.ok) throw new Error('Failed to submit order');
+      const newOrder = await res.json();
+      console.log('Created new order:', newOrder);
+      dispatch(clearCart());
       navigate('/Order/Status');
     } catch (err) {
       console.error('Order creation failed:', err);
       setError('Order failed. Please try again.');
     }
+
+    console.log('Creating order with:', {
+      userId,
+      phone,
+      address,
+      priority,
+      items: orderItems,
+      total_price: finalPrice,
+    });
   };
 
   return (
@@ -109,9 +123,7 @@ export default function CreateOrder() {
               required
             />
           </div>
-          {error.phone && (
-            <p className="mb-6 text-sm text-red-500">{error.phone}</p>
-          )}
+          {error && <p className="mb-6 text-sm text-red-500">{error}</p>}
           <div className="mb-6 flex grow gap-2">
             <label className="py-2 text-lg sm:basis-40">Address</label>
             <input
@@ -122,7 +134,7 @@ export default function CreateOrder() {
               required
             />
           </div>
-          {error.address && <p>{error.address}</p>}
+
           <div className="mb-3 flex flex-row items-center gap-5">
             <input
               name="priority"
